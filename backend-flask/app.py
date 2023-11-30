@@ -56,38 +56,38 @@ def post_example():
         product_title_element = soup.find('span', {'id': 'productTitle', 'class': 'a-size-large product-title-word-break'})
         if product_title_element is not None:
             product_title = product_title_element.text.strip()
-            print("Product Title:", product_title)
+            # print("Product Title:", product_title)
         else:
             print("Product title not found in the HTML response.")
         
         # ------------------Extract the price------------------------------
         price_element = soup.find('span', {'class': 'a-offscreen'})
         product_price = price_element.get_text(strip=True)
-        print("Product Price:", product_price)
+        # print("Product Price:", product_price)
 
         # -------------------Extract the product description---------------
         description_div = soup.find('div', {'id': 'productDescription'})
         product_description = description_div.get_text(strip=True)
-        print("Product Description:", product_description)
+        # print("Product Description:", product_description)
 
         # -------------------Extract the src image url---------------------
         img_tag = soup.find('li', {'class': 'image'}).find('img')
         image_url = img_tag['src']
-        print("Image URL:", image_url)
+        # print("Image URL:", image_url)
 
         # -------------------Find the critical reviews URL-----------------
         # Find the 'See more reviews' link
         see_more_reviews_link = soup.find('a', {'data-hook': 'see-all-reviews-link-foot'})
         # Extract the href attribute
         reviews_url = "https://www.amazon.com" + see_more_reviews_link['href']
-        print("See more reviews URL:", reviews_url)
+        # print("See more reviews URL:", reviews_url)
 
         # convert 'see more reviews' link to 'critical reviews' link
         tp_url = reviews_url + "&filterByStar=critical&pageNumber=1"
         pattern_to_find = r'cm_cr_dp_d_show_all_btm'
         replacement_pattern = 'cm_cr_arp_d_viewopt_sr'
         critical_reviews_url = re.sub(pattern_to_find, replacement_pattern, tp_url)
-        print("Critical Reviews URL:", critical_reviews_url)
+        # print("Critical Reviews URL:", critical_reviews_url)
 
         # --------------------Extract the critical reviews-------------------
         def scrape_critical_page(soup, reviews):
@@ -123,8 +123,8 @@ def post_example():
             next_li_element = soup.find('li', {'class': 'a-last'}).find('a')
 
 
-        print("#####################################")
-        print(len(reviews))
+        # print("#####################################")
+        # print(len(reviews))
         
         all_reviews = ""
         for review in reviews:
